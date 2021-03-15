@@ -271,6 +271,12 @@ def get_conn(options):
     """
     Return a connection building it from the options.
     """
+    if options.get('auth_token'):
+        return Connection(preauthurl=options['auth_url'],
+                          preauthtoken=options['auth_token'],
+                          insecure=options['insecure'],
+                          ssl_compression=options['ssl_compression'],
+                          cacert=options['os_cacert'])
     return Connection(options['auth'],
                       options['user'],
                       options['key'],
